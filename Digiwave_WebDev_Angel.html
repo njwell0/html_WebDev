@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroVault - Y2K & Skena Thrift Shop</title>
+    
+    <!-- Google Fonts: Space Grotesk & Syne untuk vibe Y2K/Streetwear -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f0f12;
+            color: #f1f1f1;
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            background-color: rgba(15, 15, 18, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #ccff00; /* Warna Neon Lime khas Y2K/Skena */
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ccff00;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(180deg, rgba(15,15,18,0.3) 0%, rgba(15,15,18,1) 100%), 
+                        url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 120px 20px;
+            border-bottom: 1px solid #222;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: #ccff00;
+            background: -webkit-linear-gradient(#ccff00, #00ffcc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .badge-hero {
+            display: inline-block;
+            background: #222;
+            border: 1px solid #ccff00;
+            color: #ccff00;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* SECTION CONTAINERS */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background-color: #222;
+        }
+
+        /* ABOUT SECTION */
+        .about-box {
+            background-color: #16161a;
+            border: 1px solid #26262e;
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ccff00;
+        }
+
+        .about-text p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .about-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: #222;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #fff;
+            border: 1px solid #333;
+        }
+
+        /* CATALOG / PRODUCTS SECTION */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: #16161a;
+            border: 1px solid #26262e;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #ccff00;
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #ccff00;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-details {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ccff00;
+            margin-bottom: 20px;
+        }
+
+        /* WA BUTTON */
+        .btn-wa {
+            display: block;
+            text-align: center;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: background-color 0.3s, color 0.3s;
+            margin-top: auto;
+        }
+
+        .btn-wa:hover {
+            background-color: #ccff00;
+            color: #000;
+        }
+
+        /* LOCATION SECTION */
+        .location-box {
+            background-color: #16161a;
+            border: 1px solid #26262e;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .location-address {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid #222;
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .about-box {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">⚡ RETROVAULT</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#drop">Latest Drop</a></li>
+                <li><a href="#location">Store</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <span class="badge-hero">Curated Vintage & Streetwear</span>
+        <h1>FIND YOUR <span>SKENA & Y2K</span> FIT HERE</h1>
+        <p>1-of-1 curated vintage items. Oversized tees, Y2K jackets, baggy pants & rare finds.</p>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section">
+        <h2 class="section-title">01. ABOUT US</h2>
+        <div class="about-box">
+            <div class="about-text">
+                <h3>VIBE CHECK: PASSED 🎯</h3>
+                <p>RetroVault adalah curated thrift store yang memfokuskan pada pakaian bernuansa Y2K, Skena, Vintage Streetwear, dan Cyber-aesthetic.</p>
+                <p>Setiap item disortir secara ketat (1-of-1 item), terjamin kebersihannya (*already washed & ready to wear*), dan siap bikin tampilan kamu beda dari yang lain.</p>
+                <div class="about-tags">
+                    <span class="tag">#Y2KStyle</span>
+                    <span class="tag">#SkenaFits</span>
+                    <span class="tag">#VintageTee</span>
+                    <span class="tag">#BaggyPants</span>
+                    <span class="tag">#ReadyToWear</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KATALOG DROP BARANG -->
+    <section id="drop" class="section">
+        <h2 class="section-title">02. LATEST DROP</h2>
+        <div class="products-grid">
+            
+            <!-- Barang 1 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <span class="status-badge">Available</span>
+                    <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Vintage Band Tee">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Vintage Wash Rock Band Tee</h3>
+                    <div class="product-details">
+                        <span>Size: L (72x56)</span> • 
+                        <span>Cond: 9.5/10</span>
+                    </div>
+                    <div class="product-price">Rp 145.000</div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20RetroVault,%20saya%20mau%20take%20item:%20Vintage%20Wash%20Rock%20Band%20Tee%20(Size%20L)" target="_blank" class="btn-wa">Co / Take Item</a>
+                </div>
+            </div>
+
+            <!-- Barang 2 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <span class="status-badge">Available</span>
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80" alt="Y2K Leather Jacket">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Y2K Oversized Leather Jacket</h3>
+                    <div class="product-details">
+                        <span>Size: XL (74x62)</span> • 
+                        <span>Cond: 9/10</span>
+                    </div>
+                    <div class="product-price">Rp 280.000</div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20RetroVault,%20saya%20mau%20take%20item:%20Y2K%20Oversized%20Leather%20Jacket" target="_blank" class="btn-wa">Co / Take Item</a>
+                </div>
+            </div>
+
+            <!-- Barang 3 -->
+            <div class="product-card">
+                <div class="product-img-wrapper">
+                    <span class="status-badge">Available</span>
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Skena Baggy Cargo Pants">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Skena Multi-Pockets Cargo Pants</h3>
+                    <div class="product-details">
+                        <span>Size: 32 (P 104)</span> • 
+                        <span>Cond: 9.8/10</span>
+                    </div>
+                    <div class="product-price">Rp 195.000</div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20RetroVault,%20saya%20mau%20take%20item:%20Skena%20Cargo%20Pants" target="_blank" class="btn-wa">Co / Take Item</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ALAMAT STORE / OFFLINE SHOP -->
+    <section id="location" class="section">
+        <h2 class="section-title">03. STORE LOCATION</h2>
+        <div class="location-box">
+            <p class="location-address">
+                📍 <strong>RETROVAULT OFFLINE VAULT</strong><br>
+                Jl. Cenderawasih No. 88, Mangkubumi, Yogyakarta<br>
+                (Samping Coffee Shop / Depan Parkiran Utama)<br><br>
+                ⏰ <strong>Open Daily:</strong> 13.00 - 22.00 WIB
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 RETROVAULT. All items are 1-of-1 thrifted & authentic.</p>
+    </footer>
+
+</body>
+</html>
